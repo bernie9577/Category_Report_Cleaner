@@ -1,0 +1,21 @@
+Sub Clean_Category_Report()
+'
+' Clean_Category_Report Macro
+' Replace PLA with DVE, Convert UPC to number, Change N/A to REG for Price Type
+'
+    Rows("1:1").Select
+    Selection.AutoFilter
+    Columns("D:D").Select
+    Selection.Replace What:="Plantation", Replacement:="Davie", LookAt:=xlPart, SearchOrder:=xlByRows, MatchCase:=False, SearchFormat:=False, ReplaceFormat:=False
+    Range("J2").Select
+    Range(Selection, Selection.End(xlDown)).Select
+    With Selection
+        .NumberFormat = "General"
+        .Value = .Value
+    End With
+    
+    Columns("N:O").Select
+    Selection.Replace What:="N/A", Replacement:="REG", LookAt:=xlPart, SearchOrder:=xlByRows, MatchCase:=False, SearchFormat:=False, ReplaceFormat:=False
+        
+    Range("A1").Select
+End Sub
